@@ -1,0 +1,271 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> include_directive main_function
+Rule 2     include_directive -> INCLUDE IOSTREAM
+Rule 3     main_function -> INT MAIN LPAREN RPAREN LBRACE statements RBRACE
+Rule 4     statements -> statement statement
+Rule 5     statements -> empty
+Rule 6     statement -> output_statement
+Rule 7     statement -> return_statement
+Rule 8     output_statement -> STD_COUT OUTPUT_OPERATOR STRING OUTPUT_OPERATOR STD_ENDL SEMICOLON
+Rule 9     return_statement -> RETURN ZERO SEMICOLON
+Rule 10    empty -> <empty>
+
+Terminals, with rules where they appear
+
+INCLUDE              : 2
+INT                  : 3
+IOSTREAM             : 2
+LBRACE               : 3
+LPAREN               : 3
+MAIN                 : 3
+OUTPUT_OPERATOR      : 8 8
+RBRACE               : 3
+RETURN               : 9
+RPAREN               : 3
+SEMICOLON            : 8 9
+STD_COUT             : 8
+STD_ENDL             : 8
+STRING               : 8
+ZERO                 : 9
+error                : 
+
+Nonterminals, with rules where they appear
+
+empty                : 5
+include_directive    : 1
+main_function        : 1
+output_statement     : 6
+program              : 0
+return_statement     : 7
+statement            : 4 4
+statements           : 3
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . include_directive main_function
+    (2) include_directive -> . INCLUDE IOSTREAM
+
+    INCLUDE         shift and go to state 3
+
+    program                        shift and go to state 1
+    include_directive              shift and go to state 2
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> include_directive . main_function
+    (3) main_function -> . INT MAIN LPAREN RPAREN LBRACE statements RBRACE
+
+    INT             shift and go to state 5
+
+    main_function                  shift and go to state 4
+
+state 3
+
+    (2) include_directive -> INCLUDE . IOSTREAM
+
+    IOSTREAM        shift and go to state 6
+
+
+state 4
+
+    (1) program -> include_directive main_function .
+
+    $end            reduce using rule 1 (program -> include_directive main_function .)
+
+
+state 5
+
+    (3) main_function -> INT . MAIN LPAREN RPAREN LBRACE statements RBRACE
+
+    MAIN            shift and go to state 7
+
+
+state 6
+
+    (2) include_directive -> INCLUDE IOSTREAM .
+
+    INT             reduce using rule 2 (include_directive -> INCLUDE IOSTREAM .)
+
+
+state 7
+
+    (3) main_function -> INT MAIN . LPAREN RPAREN LBRACE statements RBRACE
+
+    LPAREN          shift and go to state 8
+
+
+state 8
+
+    (3) main_function -> INT MAIN LPAREN . RPAREN LBRACE statements RBRACE
+
+    RPAREN          shift and go to state 9
+
+
+state 9
+
+    (3) main_function -> INT MAIN LPAREN RPAREN . LBRACE statements RBRACE
+
+    LBRACE          shift and go to state 10
+
+
+state 10
+
+    (3) main_function -> INT MAIN LPAREN RPAREN LBRACE . statements RBRACE
+    (4) statements -> . statement statement
+    (5) statements -> . empty
+    (6) statement -> . output_statement
+    (7) statement -> . return_statement
+    (10) empty -> .
+    (8) output_statement -> . STD_COUT OUTPUT_OPERATOR STRING OUTPUT_OPERATOR STD_ENDL SEMICOLON
+    (9) return_statement -> . RETURN ZERO SEMICOLON
+
+    RBRACE          reduce using rule 10 (empty -> .)
+    STD_COUT        shift and go to state 16
+    RETURN          shift and go to state 17
+
+    statements                     shift and go to state 11
+    statement                      shift and go to state 12
+    empty                          shift and go to state 13
+    output_statement               shift and go to state 14
+    return_statement               shift and go to state 15
+
+state 11
+
+    (3) main_function -> INT MAIN LPAREN RPAREN LBRACE statements . RBRACE
+
+    RBRACE          shift and go to state 18
+
+
+state 12
+
+    (4) statements -> statement . statement
+    (6) statement -> . output_statement
+    (7) statement -> . return_statement
+    (8) output_statement -> . STD_COUT OUTPUT_OPERATOR STRING OUTPUT_OPERATOR STD_ENDL SEMICOLON
+    (9) return_statement -> . RETURN ZERO SEMICOLON
+
+    STD_COUT        shift and go to state 16
+    RETURN          shift and go to state 17
+
+    statement                      shift and go to state 19
+    output_statement               shift and go to state 14
+    return_statement               shift and go to state 15
+
+state 13
+
+    (5) statements -> empty .
+
+    RBRACE          reduce using rule 5 (statements -> empty .)
+
+
+state 14
+
+    (6) statement -> output_statement .
+
+    STD_COUT        reduce using rule 6 (statement -> output_statement .)
+    RETURN          reduce using rule 6 (statement -> output_statement .)
+    RBRACE          reduce using rule 6 (statement -> output_statement .)
+
+
+state 15
+
+    (7) statement -> return_statement .
+
+    STD_COUT        reduce using rule 7 (statement -> return_statement .)
+    RETURN          reduce using rule 7 (statement -> return_statement .)
+    RBRACE          reduce using rule 7 (statement -> return_statement .)
+
+
+state 16
+
+    (8) output_statement -> STD_COUT . OUTPUT_OPERATOR STRING OUTPUT_OPERATOR STD_ENDL SEMICOLON
+
+    OUTPUT_OPERATOR shift and go to state 20
+
+
+state 17
+
+    (9) return_statement -> RETURN . ZERO SEMICOLON
+
+    ZERO            shift and go to state 21
+
+
+state 18
+
+    (3) main_function -> INT MAIN LPAREN RPAREN LBRACE statements RBRACE .
+
+    $end            reduce using rule 3 (main_function -> INT MAIN LPAREN RPAREN LBRACE statements RBRACE .)
+
+
+state 19
+
+    (4) statements -> statement statement .
+
+    RBRACE          reduce using rule 4 (statements -> statement statement .)
+
+
+state 20
+
+    (8) output_statement -> STD_COUT OUTPUT_OPERATOR . STRING OUTPUT_OPERATOR STD_ENDL SEMICOLON
+
+    STRING          shift and go to state 22
+
+
+state 21
+
+    (9) return_statement -> RETURN ZERO . SEMICOLON
+
+    SEMICOLON       shift and go to state 23
+
+
+state 22
+
+    (8) output_statement -> STD_COUT OUTPUT_OPERATOR STRING . OUTPUT_OPERATOR STD_ENDL SEMICOLON
+
+    OUTPUT_OPERATOR shift and go to state 24
+
+
+state 23
+
+    (9) return_statement -> RETURN ZERO SEMICOLON .
+
+    STD_COUT        reduce using rule 9 (return_statement -> RETURN ZERO SEMICOLON .)
+    RETURN          reduce using rule 9 (return_statement -> RETURN ZERO SEMICOLON .)
+    RBRACE          reduce using rule 9 (return_statement -> RETURN ZERO SEMICOLON .)
+
+
+state 24
+
+    (8) output_statement -> STD_COUT OUTPUT_OPERATOR STRING OUTPUT_OPERATOR . STD_ENDL SEMICOLON
+
+    STD_ENDL        shift and go to state 25
+
+
+state 25
+
+    (8) output_statement -> STD_COUT OUTPUT_OPERATOR STRING OUTPUT_OPERATOR STD_ENDL . SEMICOLON
+
+    SEMICOLON       shift and go to state 26
+
+
+state 26
+
+    (8) output_statement -> STD_COUT OUTPUT_OPERATOR STRING OUTPUT_OPERATOR STD_ENDL SEMICOLON .
+
+    STD_COUT        reduce using rule 8 (output_statement -> STD_COUT OUTPUT_OPERATOR STRING OUTPUT_OPERATOR STD_ENDL SEMICOLON .)
+    RETURN          reduce using rule 8 (output_statement -> STD_COUT OUTPUT_OPERATOR STRING OUTPUT_OPERATOR STD_ENDL SEMICOLON .)
+    RBRACE          reduce using rule 8 (output_statement -> STD_COUT OUTPUT_OPERATOR STRING OUTPUT_OPERATOR STD_ENDL SEMICOLON .)
+
